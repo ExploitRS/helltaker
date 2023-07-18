@@ -7,6 +7,13 @@ class Player:
         self._y_ = 32
         self._direction_ = None
 
+    def update(self):
+        if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btn(pyxel.KEY_A):
+            self._x_ = max(self._x_ - 2, 0)
+
+        if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btn(pyxel.KEY_D):
+            self._x_ = min(self._x_ + 2, pyxel.width -16)
+
     def draw(self):
         pyxel.blt(
             self._x_,

@@ -2,7 +2,7 @@ import pyxel
 import game
 
 def main():
-    game.App
+    game.App()
 
 if __name__ == "__main__":
     main()
