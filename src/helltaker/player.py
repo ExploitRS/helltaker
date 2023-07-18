@@ -14,6 +14,12 @@ class Player:
         if pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btn(pyxel.KEY_D):
             self._x_ = min(self._x_ + 2, pyxel.width -16)
 
+        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btn(pyxel.KEY_W):
+            self._y_ = self._y_ - 2
+
+        if pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btn(pyxel.KEY_S):
+            self._y_ = self._y_ + 2
+
     def draw(self):
         pyxel.blt(
             self._x_,
