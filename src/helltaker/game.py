@@ -1,6 +1,8 @@
 import pyxel
 import player
 import nav
+import maze
+import conf
 
 class App:
     def __init__(self):
@@ -8,8 +10,13 @@ class App:
         GAME_WIDTH = 160
         GAME_TITLE = "SFC Saver"
 
+        config = conf.Conf(GAME_WIDTH, GAME_HEIGHT, GAME_TITLE)
+
         pyxel.init(GAME_WIDTH, GAME_HEIGHT, title=GAME_TITLE)
-        pyxel.load("../../assets/resources/sample.pyxres")
+        pyxel.load("../../assets/resources/hell.pyxres")
+
+        MAZES = init_maze_list(config)
+        self._maze_list_ = MAZES
 
         self._time_limit_ = 0
         self._energy_ = 3
@@ -34,5 +41,11 @@ class App:
             pyxel.quit()
 
     def draw(self):
-        self._nav_.draw()
+        self._maze_list_[0].draw()
         self._player_.draw()
+        self._nav_.draw()
+
+def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
+    TM = 0
+    MAZE1 = maze.Maze(conf, TM, 0, 0, 56, 48, 0)
+    return [ MAZE1 ]
