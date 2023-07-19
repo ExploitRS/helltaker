@@ -29,7 +29,7 @@ class Player:
             0,
             8,
             8,
-            12,
+            0,
         )
 
 class Direction(Enum):
