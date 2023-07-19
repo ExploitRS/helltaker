@@ -3,7 +3,7 @@ import pyxel
 class Nav:
     def __init__(self, stage_num, life_count, time):
         self._stage_num_ = stage_num
-        self._life_count_ = life_count
+        self._life_ = life_count
         self._time_ = time
 
     def update(self):
@@ -11,7 +11,7 @@ class Nav:
 
     def draw(self):
         self._stage_num_.draw()
-        self._life_count_.draw()
+        self._life_.draw()
         self._time_.draw()
 
 class Pallet:
