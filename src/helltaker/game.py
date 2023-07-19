@@ -16,9 +16,9 @@ class App:
         self._stage_num_ = 1
         self._player_ = player.Player()
 
-        self._time_obj_ = nav.Pallet(20, 20, self._time_limit_, 7)
-        self._life_count_obj_ = nav.Pallet(20, (GAME_HEIGHT - 20), self._energy_, 7)
-        self._stage_num_obj_ = nav.Pallet((GAME_WIDTH - 20), (GAME_HEIGHT - 20), self._stage_num_, 7)
+        self._time_obj_ = nav.Pallet(10, 10, self._time_limit_, 7)
+        self._life_count_obj_ = nav.Pallet(10, (GAME_HEIGHT - 10), self._energy_, 7)
+        self._stage_num_obj_ = nav.Pallet((GAME_WIDTH - 10), (GAME_HEIGHT - 10), self._stage_num_, 7)
 
         self._nav_ = nav.Nav(self._time_obj_, self._life_count_obj_, self._stage_num_obj_)
 
