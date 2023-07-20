@@ -24,23 +24,16 @@ class Maze:
                 self._player_.move(neighbor)
 
             else:
-                print("omae kirai")
                 self._player_.move(self._player_._pos_)
 
         if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.KEY_D):
             dir = Direction.Right
             neighbor = self._player_.neighbor(dir)
-            print(neighbor)
-            print(f"neichan-x: {neighbor.x}")
-            print(f"neichan-y: {neighbor.y}")
-
 
             if neighbor not in self._walls_:
-                print("yoyoyo hahahahahahha")
                 self._player_.move(neighbor)
 
             else:
-                print("omae kirai")
                 self._player_.move(self._player_._pos_)
 
         if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.KEY_W):
@@ -50,7 +43,6 @@ class Maze:
                 self._player_.move(neighbor)
 
             else:
-                print("omae kirai")
                 self._player_.move(self._player_._pos_)
 
         if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.KEY_S):
@@ -60,7 +52,6 @@ class Maze:
                 self._player_.move(neighbor)
 
             else:
-                print("omae kirai")
                 self._player_.move(self._player_._pos_)
 
     def draw(self):
@@ -68,7 +59,7 @@ class Maze:
         self._player_.draw()
 
     def is_free(self) -> bool:
-        self._player_.pos() not in self._walls_
+        self._player_._pos_ not in self._walls_
 
 
 # For pyxel purpose
