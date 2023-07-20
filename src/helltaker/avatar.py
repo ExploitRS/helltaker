@@ -42,34 +42,3 @@ class Avatar:
 
     def pos(self) -> Position:
         return self._pos_
-
-if __name__ == "__main__":
-    pos = Position(0, 0)
-    ex1 = Position(0, 0)
-    ex2 = Position(1, 1)
-    ex3 = Position(1.0, 1.0)
-    lst = [ex1, ex2]
-
-    if pos == ex1:
-        print("pos and ex1 is same")
-
-    if pos == ex2:
-        print("pos and ex2 is same")
-
-    if ex2 == ex3:
-        print("ex2 and ex3 is same")
-    if pos in lst:
-        print("lst contain pos")
-
-    pos2 = pos
-    pos3 = Position(0, 0)
-    pos3 = pos
-    pos2.x = 1
-
-    print(f"pos1: {pos.x}")
-    print(f"pos2: {pos2.x}")
-    print(f"pos3: {pos3.x}")
-
-    print(f"pos: {type(pos)}")
-    print(f"ex1: {type(ex1)}")
-    print(f"ex2: {type(ex2)}")
