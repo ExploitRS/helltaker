@@ -1,25 +1,32 @@
 from enum import Enum
+from copy import deepcopy
 
 import pyxel
 
-from avatar import Avatar
+from avatar import Avatar, Position
+
+class Direction(Enum):
+    Right = Position(8, 0)
+    Left  = Position(-8, 0)
+    Up    = Position(0, -8)
+    Down  = Position(0, 8)
 
 class Player(Avatar):
     def update(self):
-        if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
-            self._x_ = max(self._x_ - 8, 0)
+        pass
 
-        if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.KEY_D):
-            self._x_ = min(self._x_ + 8, pyxel.width -16)
+    def neighbor(self, dir: Direction) -> Position:
+        pos = deepcopy(self._pos_)
+        print(f"x: {pos.x}")
+        print(f"y: {pos.y}")
+        dir_pos = dir.value
+        print(f"dirx: {dir_pos.x}")
+        pos.sub_update(dir_pos.x, dir_pos.y)
+        print(f"neix {pos.x}")
+        print(f"neiy {pos.y}")
+        print(f"naita: {self._pos_.x}")
+        return pos
 
-        if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.KEY_W):
-            self._y_ = self._y_ - 8
-
-        if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.KEY_S):
-            self._y_ = self._y_ + 8
-
-class Direction(Enum):
-    Right = 1
-    Left  = 2
-    Up    = 3
-    Down  = 4
+    def move(self, pos: Position):
+        print(f"move: {pos.x}")
+        self._pos_ = pos
