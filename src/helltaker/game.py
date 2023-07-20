@@ -3,7 +3,7 @@ import pyxel
 import nav
 import maze
 import conf
-import avatar
+from avatar import Avatar, Position
 import player
 import enemy
 
@@ -26,7 +26,7 @@ class App:
         self._stage_num_ = 1
 
         self._time_obj_ = nav.Pallet(10, 10, self._time_limit_, 7)
-        self._life_count_obj_ = nav.Pallet(10, (GAME_HEIGHT - 10), self._energy_, 7)
+        self._life_count_obj_ = nav.Pallet(10, (GAME_HEIGHT - 10), self._maze_list_[0]._steps_, 7)
         self._stage_num_obj_ = nav.Pallet((GAME_WIDTH - 10), (GAME_HEIGHT - 10), self._stage_num_, 7)
 
         self._nav_ = nav.Nav(self._time_obj_, self._life_count_obj_, self._stage_num_obj_)
@@ -35,7 +35,7 @@ class App:
 
     def update(self):
         self._time_obj_._text_ = str(self._time_limit_)
-        self._life_count_obj_._text_ = str(self._energy_)
+        self._life_count_obj_._text_ = str(self._maze_list_[0]._steps_)
         self._stage_num_obj_._text_ = str(self._stage_num_)
         self._maze_list_[0].update()
 
@@ -51,7 +51,14 @@ def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
     TM = 0
 
     TMAP1 = maze.TileMap(conf._x_, conf._y_, TM, 0, 0, 56, 48, 0)
+    STEPS1 = 16
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
     ENEMIES1 = [enemy.Enemy()]
-    MAZE1 = maze.Maze(TMAP1, PLAYER1, ENEMIES1, [48, 40])
+    WALLS = [
+        Position(
+            TMAP1._x_ / 2 + 20,
+            (TMAP1._y_ / 2) - (TMAP1._h_ / 2)
+        ),
+    ]
+    MAZE1 = maze.Maze(TMAP1, STEPS1, PLAYER1, ENEMIES1, [48, 40], WALLS)
     return [ MAZE1 ]
