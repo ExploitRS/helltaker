@@ -3,23 +3,73 @@ from enum import Enum
 import pyxel
 
 import conf
-from player import Player
+from player import Player, Direction
 from enemy import Enemy
 
 class Maze:
-    def __init__(self, tm, player: Player, enemies: list[Enemy], end_pos):
-        self._tilemap_ = tm
-        self._is_clear = False
-        self._player_ = player 
-        self._enemies_= enemies
-        self._end_pos_ = end_pos
+    def __init__(self, tm, steps, player: Player, enemies: list[Enemy], end_pos, walls):
+        self._tilemap_  = tm
+        self._is_clear_ = False
+        self._steps_    = steps
+        self._player_   = player 
+        self._enemies_  = enemies
+        self._end_pos_  = end_pos
+        self._walls_    = walls
  
     def update(self):
-        self._player_.update()
+        if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
+            dir = Direction.Left
+            neighbor = self._player_.neighbor(dir)
+            if neighbor not in self._walls_:
+                self._player_.move(neighbor)
+
+            else:
+                print("omae kirai")
+                self._player_.move(self._player_._pos_)
+
+        if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.KEY_D):
+            dir = Direction.Right
+            neighbor = self._player_.neighbor(dir)
+            print(neighbor)
+            print(f"neichan-x: {neighbor.x}")
+            print(f"neichan-y: {neighbor.y}")
+
+
+            if neighbor not in self._walls_:
+                print("yoyoyo hahahahahahha")
+                self._player_.move(neighbor)
+
+            else:
+                print("omae kirai")
+                self._player_.move(self._player_._pos_)
+
+        if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.KEY_W):
+            dir = Direction.Up
+            neighbor = self._player_.neighbor(dir)
+            if neighbor not in self._walls_:
+                self._player_.move(neighbor)
+
+            else:
+                print("omae kirai")
+                self._player_.move(self._player_._pos_)
+
+        if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.KEY_S):
+            dir = Direction.Down
+            neighbor = self._player_.neighbor(dir)
+            if neighbor not in self._walls_:
+                self._player_.move(neighbor)
+
+            else:
+                print("omae kirai")
+                self._player_.move(self._player_._pos_)
 
     def draw(self):
         self._tilemap_.draw()
         self._player_.draw()
+
+    def is_free(self) -> bool:
+        self._player_.pos() not in self._walls_
+
 
 # For pyxel purpose
 class TileMap:
