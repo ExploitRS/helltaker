@@ -7,6 +7,7 @@ from avatar import Avatar, Position
 import player
 import enemy
 from wall import Walls_builder
+from maze_i import maze_i
 
 class App:
     def __init__(self):
@@ -48,44 +49,5 @@ class App:
         self._nav_.draw()
 
 def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
-    # tile map number
-    TM = 0
-
-    TMAP1 = maze.TileMap(conf._x_, conf._y_, TM, 0, 0, 56, 48, 0)
-    STEPS1 = 16
-    PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
-    ENEMIES1 = [enemy.Enemy()]
-    builder = Walls_builder()
-    builder.append(
-        Position(
-            TMAP1._x_ / 2 + 20,
-            ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
-        ),
-        Position(
-            TMAP1._x_ / 2 - 8,
-            ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
-        ),
-    )
-    builder.append(
-        Position(
-            TMAP1._x_ / 2 - 12,
-            TMAP1._y_ / 2 - TMAP1._h_ / 2,
-        ), 
-        Position(
-            TMAP1._x_ / 2 - 20,
-            TMAP1._y_ / 2 - TMAP1._h_ / 2,
-        )
-    )
-    builder.append(
-        Position(
-            TMAP1._x_ / 2 - 28,
-            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 8,
-        ), 
-        Position(
-            TMAP1._x_ / 2 - 28,
-            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 16,
-        )
-    )
-    walls = builder.build()
-    MAZE1 = maze.Maze(TMAP1, STEPS1, PLAYER1, ENEMIES1, [48, 40], walls)
-    return [ MAZE1 ]
+    MAZE_I = maze_i.construct(conf)
+    return [ MAZE_I ]
