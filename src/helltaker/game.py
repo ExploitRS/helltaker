@@ -9,6 +9,7 @@ from avatar import Avatar, Position
 import player
 import enemy
 from maze_i import maze_i
+from position_vec import colorise
 
 class App:
     def __init__(self, is_debug: bool):
@@ -54,6 +55,7 @@ class App:
 
         if self._is_debug_:
             self._maze_list_[0].render_dbg()
+            colorise(self._maze_list_[0]._walls_, 8)
 
 def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
     MAZE_I = maze_i.construct(conf)
