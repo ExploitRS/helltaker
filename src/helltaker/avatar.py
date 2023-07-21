@@ -13,6 +13,12 @@ class Position:
         if (self.x == other.x) and (self.y == other.y):
             return True
 
+    def to_str(self):
+        return f"x: {self.x}\ny: {self.y}"
+        
+    def render_as_text(self):
+        pyxel.text(10, 30, self.to_str(), 7)
+
 class Avatar:
     def __init__(self, x, y, img, u, v, w, h, col):
         self._pos_ = Position(x, y)
@@ -37,6 +43,9 @@ class Avatar:
             self._h_,
             self._col_,
         )
+
+    def render_position(self):
+        self._pos_.render_as_text()
 
     def pos(self) -> Position:
         return self._pos_

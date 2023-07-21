@@ -64,6 +64,9 @@ class Maze:
         self._tilemap_.draw()
         self._player_.draw()
 
+    def render_dbg(self):
+        self._player_.render_position()
+
     def is_free(self) -> bool:
         self._player_._pos_ not in self._walls_
 
