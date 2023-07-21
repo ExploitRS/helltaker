@@ -74,11 +74,61 @@ def construct(conf: conf.Conf) -> maze.Maze:
     walls.append(
         Position(
             TMAP1._x_ / 2 + 20,
-            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2),
         ), 
         Position(
-            TMAP1._x_ / 2 - 36,
-            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
+            TMAP1._x_ / 2 + 20,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 8,
+        )
+    )
+    walls.append(
+        Position(
+            TMAP1._x_ / 2 + 12,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 16,
+        ), 
+        Position(
+            TMAP1._x_ / 2 + 12,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 16,
+        )
+    )
+    walls.append(
+        Position(
+            TMAP1._x_ / 2 + 12,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 24,
+        ), 
+        Position(
+            TMAP1._x_ / 2 + 20,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 24,
+        )
+    )
+    walls.append(
+        Position(
+            TMAP1._x_ / 2 + 28,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 32,
+        ), 
+        Position(
+            TMAP1._x_ / 2 + 28,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 40,
+        )
+    )
+    walls.append(
+        Position(
+            TMAP1._x_ / 2 + 20,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 32,
+        ), 
+        Position(
+            TMAP1._x_ / 2 + 20,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 32,
+        )
+    )
+    walls.append(
+        Position(
+            TMAP1._x_ / 2 + 4,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 24,
+        ), 
+        Position(
+            TMAP1._x_ / 2 - 12,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 24,
         )
     )
 

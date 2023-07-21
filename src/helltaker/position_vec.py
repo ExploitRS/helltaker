@@ -25,3 +25,7 @@ class pos_vec:
                     ret.append(Position(x, y))
 
         return ret
+
+def colorise(v: list[Position], col: int):
+    for e in v:
+        pyxel.rect(e.x, e.y, 8, 8, col)
