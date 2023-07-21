@@ -13,6 +13,7 @@ class Maze:
         self._tilemap_  = tm
         self._is_clear_ = False
         self._steps_    = steps
+        self._max_steps_ = steps
         self._player_   = player 
         self._srt_pos_  = deepcopy(player._pos_)
         self._enemies_  = enemies
@@ -22,6 +23,7 @@ class Maze:
     def update(self):
         if 0 >= self._steps_:
             self._player_._pos_ = self._srt_pos_
+            self._steps_ = self._max_steps_
 
         if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
             dir = Direction.Left
