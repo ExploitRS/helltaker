@@ -15,7 +15,7 @@ class Maze:
         self._steps_    = steps
         self._max_steps_ = steps
         self._player_   = player 
-        self._srt_pos_  = deepcopy(player._pos_)
+        self._srt_pos_  = player._pos_
         self._enemies_  = enemies
         self._end_pos_  = end_pos
         self._walls_    = walls
