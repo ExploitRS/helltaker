@@ -1,10 +1,36 @@
 from enum import Enum
+from copy import deepcopy
 
 import pyxel
 
 import conf
 from player import Player, Direction
 from enemy import Enemy
+from avatar import Position
+import numpy as np
+
+class Walls_builder:
+
+    def __init__(self):
+        self._ls_: list[tuple] = []
+
+    def append(self, base: Position, dest: Position):
+        self._ls_.append((base, dest))
+
+    def build(self) -> list[Position]:
+        ret: list[Position] = []
+
+        for e in self._ls_:
+            base, dest = e
+
+            dx = 8.0 if dest.x >= base.x else -8.0
+            dy = 8.0 if dest.y >= base.y else -8.0
+
+            for y in np.arange(base.y, dest.y + dy, dy):
+                for x in np.arange(base.x, dest.x + dx, dx):
+                    ret.append(Position(x, y))
+
+        return ret
 
 class Maze:
     def __init__(self, tm, steps, player: Player, enemies: list[Enemy], end_pos, walls):
@@ -22,6 +48,7 @@ class Maze:
             neighbor = self._player_.neighbor(dir)
             if neighbor not in self._walls_:
                 self._player_.move(neighbor)
+                self._steps_ -= 1
 
             else:
                 self._player_.move(self._player_._pos_)
@@ -32,6 +59,7 @@ class Maze:
 
             if neighbor not in self._walls_:
                 self._player_.move(neighbor)
+                self._steps_ -= 1
 
             else:
                 self._player_.move(self._player_._pos_)
@@ -41,6 +69,7 @@ class Maze:
             neighbor = self._player_.neighbor(dir)
             if neighbor not in self._walls_:
                 self._player_.move(neighbor)
+                self._steps_ -= 1
 
             else:
                 self._player_.move(self._player_._pos_)
@@ -50,6 +79,7 @@ class Maze:
             neighbor = self._player_.neighbor(dir)
             if neighbor not in self._walls_:
                 self._player_.move(neighbor)
+                self._steps_ -= 1
 
             else:
                 self._player_.move(self._player_._pos_)
@@ -80,13 +110,28 @@ class TileMap:
     def draw(self):
         pyxel.bltm((self._x_ / 2) - (self._w_ / 2), (self._y_ / 2) - (self._h_ / 2), self._tm_, self._u_, self._v_, self._w_, self._h_)
 
+if __name__ == "__main__":
+    builder = Walls_builder()
+    builder.append(
+        # Position(
+        #     0,
+        #     0,
+        # ),
+        # Position(
+        #     5,
+        #     5,
+        # )
+        Position(
+            160 / 2 + 20,
+            ((120 / 2) - (48 / 2) - 8)
+        ),
+        Position(
+            160 / 2 + 4,
+            ((120 / 2) - (48 / 2) - 8)
+        )
+    )
+    ret = builder.build()
+    for e in ret:
+        print("x: ", e.x)
+        print("y: ", e.y)
 
-class Tile:
-    def __init__(self, x, y, tile_kind):
-        self._x_ = x
-        self._y_ = y
-        self._kind_: TileKind = tile_kind
-
-class TileKind(Enum):
-    Floor = 0
-    Wall = 1
