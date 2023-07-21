@@ -54,11 +54,37 @@ def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
     STEPS1 = 16
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
     ENEMIES1 = [enemy.Enemy()]
-    WALLS = [
+    builder = maze.Walls_builder()
+    builder.append(
         Position(
             TMAP1._x_ / 2 + 20,
-            (TMAP1._y_ / 2) - (TMAP1._h_ / 2)
+            ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
         ),
-    ]
-    MAZE1 = maze.Maze(TMAP1, STEPS1, PLAYER1, ENEMIES1, [48, 40], WALLS)
+        Position(
+            TMAP1._x_ / 2 - 8,
+            ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
+        ),
+    )
+    builder.append(
+        Position(
+            TMAP1._x_ / 2 - 12,
+            TMAP1._y_ / 2 - TMAP1._h_ / 2,
+        ), 
+        Position(
+            TMAP1._x_ / 2 - 20,
+            TMAP1._y_ / 2 - TMAP1._h_ / 2,
+        )
+    )
+    builder.append(
+        Position(
+            TMAP1._x_ / 2 - 28,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 8,
+        ), 
+        Position(
+            TMAP1._x_ / 2 - 28,
+            TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 16,
+        )
+    )
+    walls = builder.build()
+    MAZE1 = maze.Maze(TMAP1, STEPS1, PLAYER1, ENEMIES1, [48, 40], walls)
     return [ MAZE1 ]
