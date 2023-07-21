@@ -7,7 +7,7 @@ sys.path.append("../")
 import maze
 import conf 
 from avatar import Position
-from wall import Walls_builder
+from position_vec import pos_vec
 import enemy
 import player
 
@@ -20,8 +20,8 @@ def construct(conf: conf.Conf) -> maze.Maze:
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
     ENEMIES1 = [enemy.Enemy()]
 
-    builder = Walls_builder()
-    builder.append(
+    walls = pos_vec()
+    walls.append(
         Position(
             TMAP1._x_ / 2 + 20,
             ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
@@ -31,7 +31,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             ((TMAP1._y_ / 2) - (TMAP1._h_ / 2) - 8)
         ),
     )
-    builder.append(
+    walls.append(
         Position(
             TMAP1._x_ / 2 - 12,
             TMAP1._y_ / 2 - TMAP1._h_ / 2,
@@ -41,7 +41,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             TMAP1._y_ / 2 - TMAP1._h_ / 2,
         )
     )
-    builder.append(
+    walls.append(
         Position(
             TMAP1._x_ / 2 - 28,
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 8,
@@ -51,7 +51,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 16,
         )
     )
-    builder.append(
+    walls.append(
         Position(
             TMAP1._x_ / 2 - 36,
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 24,
@@ -61,7 +61,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 40,
         )
     )
-    builder.append(
+    walls.append(
         Position(
             TMAP1._x_ / 2 + 20,
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
@@ -71,7 +71,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
         )
     )
-    builder.append(
+    walls.append(
         Position(
             TMAP1._x_ / 2 + 20,
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
@@ -81,5 +81,7 @@ def construct(conf: conf.Conf) -> maze.Maze:
             TMAP1._y_ / 2 - (TMAP1._h_ / 2) + 48,
         )
     )
-    walls = builder.build()
+
+    walls = walls.build()
+
     return maze.Maze(TMAP1, STEPS, PLAYER1, ENEMIES1, [48, 40], walls)

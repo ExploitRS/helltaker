@@ -6,7 +6,6 @@ import conf
 from avatar import Avatar, Position
 import player
 import enemy
-from wall import Walls_builder
 from maze_i import maze_i
 
 class App:

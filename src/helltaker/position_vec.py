@@ -3,7 +3,7 @@ import numpy as np
 
 from avatar import Position
 
-class Walls_builder:
+class pos_vec:
 
     def __init__(self):
         self._ls_: list[tuple] = []
