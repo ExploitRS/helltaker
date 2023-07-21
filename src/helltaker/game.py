@@ -6,6 +6,7 @@ import conf
 from avatar import Avatar, Position
 import player
 import enemy
+from wall import Walls_builder
 
 class App:
     def __init__(self):
@@ -54,7 +55,7 @@ def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
     STEPS1 = 16
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
     ENEMIES1 = [enemy.Enemy()]
-    builder = maze.Walls_builder()
+    builder = Walls_builder()
     builder.append(
         Position(
             TMAP1._x_ / 2 + 20,
