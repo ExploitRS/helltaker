@@ -8,7 +8,7 @@ import maze
 import conf 
 from avatar import Position
 from position_vec import pos_vec
-import enemy
+from enemy import Wizard
 import player
 
 def construct(conf: conf.Conf) -> maze.Maze:
@@ -16,9 +16,13 @@ def construct(conf: conf.Conf) -> maze.Maze:
     TM = 0
 
     TMAP1 = maze.TileMap(conf._x_, conf._y_, TM, 0, 0, 56, 48, 0)
+    HALF_X = TMAP1._x_ / 2
+    HALF_Y = TMAP1._y_ / 2
+    HALF_H = TMAP1._h_ / 2
+    HALF_YH = HALF_Y - HALF_H
     STEPS = 16
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
-    ENEMIES1 = [enemy.Enemy()]
+    ENEMIES = [Wizard(84, 52), Wizard(76, 44), Wizard(68, 52)]
 
     walls = pos_vec()
     walls.append(
@@ -134,4 +138,4 @@ def construct(conf: conf.Conf) -> maze.Maze:
 
     walls = walls.build()
 
-    return maze.Maze(TMAP1, STEPS, PLAYER1, ENEMIES1, [48, 40], walls)
+    return maze.Maze(TMAP1, STEPS, PLAYER1, ENEMIES, [48, 40], walls)
