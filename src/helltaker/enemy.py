@@ -13,6 +13,10 @@ class Enemy(Avatar):
         self.reset_pos()
         self._is_alive_ = self.default_alive
 
+    def render(self):
+        if self._is_alive_:
+            self.draw()
+
 class Wizard(Enemy):
     def __init__(self, x, y):
         DAMAGE = 1
