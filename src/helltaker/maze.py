@@ -146,8 +146,10 @@ class Maze:
     def draw(self):
         self._tilemap_.draw()
         self._player_.draw()
-        for e in self._enemies_:
-            e.render()
+        # for e in self._enemies_:
+        #     e.render()
+
+        _ = list(map(lambda x: x.render(), self._enemies_))
 
     def render_dbg(self):
         self._player_.render_position()
