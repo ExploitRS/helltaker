@@ -12,14 +12,8 @@ class Direction(Enum):
     Down  = Position(0, 8)
 
 class Player(Avatar):
-    def update(self):
-        pass
-
     def neighbor(self, dir: Direction) -> Position:
         pos = deepcopy(self._pos_)
         dir_pos = dir.value
         pos.sub_update(dir_pos.x, dir_pos.y)
         return pos
-
-    def move(self, pos: Position):
-        self._pos_ = pos

@@ -47,5 +47,8 @@ class Avatar:
     def render_position(self):
         self._pos_.render_as_text()
 
+    def move(self, pos: Position):
+        self._pos_ = pos
+
     def pos(self) -> Position:
         return self._pos_
