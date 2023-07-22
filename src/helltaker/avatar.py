@@ -5,9 +5,12 @@ class Position:
         self.x = x
         self.y = y
 
-    def sub_update(self, other_x, other_y):
-        self.x = self.x + other_x
-        self.y = self.y + other_y
+    def __add__(self, other):
+        return Position(self.x + other.x, self.y + other.y)
+
+    def __iadd__(self, other):
+        self = self + other
+        return self
 
     def __eq__(self, other) -> bool:
         if (self.x == other.x) and (self.y == other.y):

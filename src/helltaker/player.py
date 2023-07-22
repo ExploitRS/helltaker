@@ -15,5 +15,6 @@ class Player(Avatar):
     def neighbor(self, dir: Direction) -> Position:
         pos = deepcopy(self._pos_)
         dir_pos = dir.value
-        pos.sub_update(dir_pos.x, dir_pos.y)
+        pos += dir_pos
+        print(pos.to_str())
         return pos
