@@ -10,20 +10,22 @@ from avatar import Position, Direction
 
 class Maze:
     def __init__(self, tm, steps, player: Player, enemies: list[Enemy], end_pos, walls):
-        self._tilemap_  = tm
-        self._is_clear_ = False
-        self._steps_    = steps
-        self._max_steps_ = steps
-        self._player_   = player 
-        self._enemies_  = enemies
-        self._end_pos_  = end_pos
-        self._walls_    = walls
+        self._tilemap_        = tm
+        self._is_clear_       = False
+        self._steps_          = steps
+        self._max_steps_      = steps
+        self._player_         = player 
+        self._enemies_        = enemies
+        self._enemies_default_ = enemies.copy()
+        self._end_pos_        = end_pos
+        self._walls_          = walls
  
     def update(self):
         if 0 >= self._steps_:
             self._player_.reset_pos()
             self._steps_ = self._max_steps_
-            _ = list(map(lambda x: x.reset_pos(), self._enemies_))
+            self._enemies_ = self._enemies_default_
+            _ = list(map(lambda x: x.respawn(), self._enemies_))
 
         if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
             dir = Direction.Left
@@ -37,7 +39,17 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
-                enemy[0].move(neighbor + dir.value)
+
+                if enemy[0].neighbor(dir) in self._walls_:
+                    enemy[0]._is_alive_ = False
+                    self._enemies_.remove(enemy[0])
+
+                elif enemy[0].neighbor(dir) in enemies_pos:
+                    return
+
+                else:
+                    enemy[0].move(neighbor + dir.value)
+
                 dec_step += enemy[0]._damage_
 
             self._player_.move(neighbor)
@@ -55,7 +67,17 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
-                enemy[0].move(neighbor + dir.value)
+
+                if enemy[0].neighbor(dir) in self._walls_:
+                    enemy[0]._is_alive_ = False
+                    self._enemies_.remove(enemy[0])
+
+                elif enemy[0].neighbor(dir) in enemies_pos:
+                    return
+
+                else:
+                    enemy[0].move(neighbor + dir.value)
+
                 dec_step += enemy[0]._damage_
 
             self._player_.move(neighbor)
@@ -73,7 +95,17 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
-                enemy[0].move(neighbor + dir.value)
+
+                if enemy[0].neighbor(dir) in self._walls_:
+                    enemy[0]._is_alive_ = False
+                    self._enemies_.remove(enemy[0])
+
+                elif enemy[0].neighbor(dir) in enemies_pos:
+                    return
+
+                else:
+                    enemy[0].move(neighbor + dir.value)
+
                 dec_step += enemy[0]._damage_
 
             self._player_.move(neighbor)
@@ -91,7 +123,17 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
-                enemy[0].move(neighbor + dir.value)
+
+                if enemy[0].neighbor(dir) in self._walls_:
+                    enemy[0]._is_alive_ = False
+                    self._enemies_.remove(enemy[0])
+
+                elif enemy[0].neighbor(dir) in enemies_pos:
+                    return
+
+                else:
+                    enemy[0].move(neighbor + dir.value)
+
                 dec_step += enemy[0]._damage_
 
             self._player_.move(neighbor)
@@ -101,7 +143,7 @@ class Maze:
         self._tilemap_.draw()
         self._player_.draw()
         for e in self._enemies_:
-            e.draw()
+            e.render()
 
     def render_dbg(self):
         self._player_.render_position()
