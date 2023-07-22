@@ -1,9 +1,9 @@
 import pyxel
 
 from avatar import Avatar, Position
-from obstract import Obstract
+from obstruct import Obstruct
 
-class Enemy(Obstract):
+class Enemy(Obstruct):
     pass
 
 class Wizard(Enemy):

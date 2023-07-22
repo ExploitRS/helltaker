@@ -9,7 +9,7 @@ import conf
 from avatar import Position
 from position_vec import pos_vec
 from enemy import Wizard
-from obstract import Barrel
+from obstruct import Barrel
 import player
 
 def construct(conf: conf.Conf) -> maze.Maze:
