@@ -50,7 +50,8 @@ class Maze:
                 else:
                     enemy[0].move(neighbor + dir.value)
 
-                dec_step += enemy[0]._damage_
+                self._steps_ -= enemy[0]._damage_
+                return
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
@@ -78,7 +79,8 @@ class Maze:
                 else:
                     enemy[0].move(neighbor + dir.value)
 
-                dec_step += enemy[0]._damage_
+                self._steps_ -= enemy[0]._damage_
+                return
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
@@ -106,7 +108,8 @@ class Maze:
                 else:
                     enemy[0].move(neighbor + dir.value)
 
-                dec_step += enemy[0]._damage_
+                self._steps_ -= enemy[0]._damage_
+                return
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
@@ -134,7 +137,8 @@ class Maze:
                 else:
                     enemy[0].move(neighbor + dir.value)
 
-                dec_step += enemy[0]._damage_
+                self._steps_ -= enemy[0]._damage_
+                return
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
