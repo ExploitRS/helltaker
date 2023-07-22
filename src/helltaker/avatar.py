@@ -35,13 +35,14 @@ class Direction(Enum):
 
 class Avatar:
     def __init__(self, x, y, img, u, v, w, h, col):
-        self._pos_ = Position(x, y)
-        self._img_ = img
-        self._u_   = u
-        self._v_   = v
-        self._w_   = w
-        self._h_   = h
-        self._col_ = col
+        self._pos_       = Position(x, y)
+        self._start_pos_ = Position(x, y)
+        self._img_       = img
+        self._u_         = u
+        self._v_         = v
+        self._w_         = w
+        self._h_         = h
+        self._col_       = col
 
     def update(self):
         pass
@@ -69,6 +70,9 @@ class Avatar:
         dir_pos = dir.value
         pos += dir_pos
         return pos
+
+    def reset_pos(self):
+        self._pos_ = self._start_pos_
 
     def pos(self) -> Position:
         return self._pos_

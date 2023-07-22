@@ -15,15 +15,15 @@ class Maze:
         self._steps_    = steps
         self._max_steps_ = steps
         self._player_   = player 
-        self._srt_pos_  = player._pos_
         self._enemies_  = enemies
         self._end_pos_  = end_pos
         self._walls_    = walls
  
     def update(self):
         if 0 >= self._steps_:
-            self._player_._pos_ = self._srt_pos_
+            self._player_.reset_pos()
             self._steps_ = self._max_steps_
+            list(map(lambda x: x.reset_pos(), self._enemies_))
 
         if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
             dir = Direction.Left
