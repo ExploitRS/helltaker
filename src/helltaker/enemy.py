@@ -9,7 +9,7 @@ class Enemy(Avatar):
         self.default_alive = is_alive
         self._is_alive_ = is_alive
 
-    def rspawn(self):
+    def respawn(self):
         self.reset_pos()
         self._is_alive_ = self.default_alive
 
