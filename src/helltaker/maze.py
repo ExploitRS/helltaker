@@ -27,48 +27,81 @@ class Maze:
 
         if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
             dir = Direction.Left
+            dec_step = 1
             neighbor = self._player_.neighbor(dir)
-            if neighbor not in self._walls_:
-                self._player_.move(neighbor)
-                self._steps_ -= 1
+            enemies_pos = [x._pos_ for x in self._enemies_]
 
-            else:
+            if neighbor in self._walls_:
                 self._player_.move(self._player_._pos_)
+                return
+
+            elif neighbor in enemies_pos:
+                enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                enemy[0].move(neighbor + dir.value)
+                dec_step += enemy[0]._damage_
+
+            self._player_.move(neighbor)
+            self._steps_ -= dec_step
 
         if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.KEY_D):
             dir = Direction.Right
+            dec_step = 1
             neighbor = self._player_.neighbor(dir)
+            enemies_pos = [x._pos_ for x in self._enemies_]
 
-            if neighbor not in self._walls_:
-                self._player_.move(neighbor)
-                self._steps_ -= 1
-
-            else:
+            if neighbor in self._walls_:
                 self._player_.move(self._player_._pos_)
+                return
+
+            elif neighbor in enemies_pos:
+                enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                enemy[0].move(neighbor + dir.value)
+                dec_step += enemy[0]._damage_
+
+            self._player_.move(neighbor)
+            self._steps_ -= dec_step
 
         if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.KEY_W):
             dir = Direction.Up
+            dec_step = 1
             neighbor = self._player_.neighbor(dir)
-            if neighbor not in self._walls_:
-                self._player_.move(neighbor)
-                self._steps_ -= 1
+            enemies_pos = [x._pos_ for x in self._enemies_]
 
-            else:
+            if neighbor in self._walls_:
                 self._player_.move(self._player_._pos_)
+                return
+
+            elif neighbor in enemies_pos:
+                enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                enemy[0].move(neighbor + dir.value)
+                dec_step += enemy[0]._damage_
+
+            self._player_.move(neighbor)
+            self._steps_ -= dec_step
 
         if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.KEY_S):
             dir = Direction.Down
+            dec_step = 1
             neighbor = self._player_.neighbor(dir)
-            if neighbor not in self._walls_:
-                self._player_.move(neighbor)
-                self._steps_ -= 1
+            enemies_pos = [x._pos_ for x in self._enemies_]
 
-            else:
+            if neighbor in self._walls_:
                 self._player_.move(self._player_._pos_)
+                return
+
+            elif neighbor in enemies_pos:
+                enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                enemy[0].move(neighbor + dir.value)
+                dec_step += enemy[0]._damage_
+
+            self._player_.move(neighbor)
+            self._steps_ -= dec_step
 
     def draw(self):
         self._tilemap_.draw()
         self._player_.draw()
+        for e in self._enemies_:
+            e.draw()
 
     def render_dbg(self):
         self._player_.render_position()
