@@ -16,5 +16,4 @@ class Player(Avatar):
         pos = deepcopy(self._pos_)
         dir_pos = dir.value
         pos += dir_pos
-        print(pos.to_str())
         return pos
