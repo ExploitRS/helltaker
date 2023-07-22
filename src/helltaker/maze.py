@@ -4,9 +4,9 @@ from copy import deepcopy
 import pyxel
 
 import conf
-from player import Player, Direction
+from player import Player
 from enemy import Enemy
-from avatar import Position
+from avatar import Position, Direction
 
 class Maze:
     def __init__(self, tm, steps, player: Player, enemies: list[Enemy], end_pos, walls):

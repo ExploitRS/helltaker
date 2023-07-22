@@ -1,3 +1,6 @@
+from enum import Enum
+from copy import deepcopy
+
 import pyxel
 
 class Position:
@@ -21,6 +24,14 @@ class Position:
         
     def render_as_text(self):
         pyxel.text(10, 30, self.to_str(), 7)
+
+class Direction(Enum):
+    Right = Position(8, 0)
+    Left  = Position(-8, 0)
+    Up    = Position(0, -8)
+    Down  = Position(0, 8)
+
+
 
 class Avatar:
     def __init__(self, x, y, img, u, v, w, h, col):
@@ -52,6 +63,12 @@ class Avatar:
 
     def move(self, pos: Position):
         self._pos_ = pos
+
+    def neighbor(self, dir: Direction) -> Position:
+        pos = deepcopy(self._pos_)
+        dir_pos = dir.value
+        pos += dir_pos
+        return pos
 
     def pos(self) -> Position:
         return self._pos_
