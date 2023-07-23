@@ -41,12 +41,13 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                e_neighbor = enemy[0].neighbor(dir)
 
                 if enemy[0].neighbor(dir) in self._walls_:
                     enemy[0]._is_alive_ = False
                     self._enemies_.remove(enemy[0])
 
-                elif enemy[0].neighbor(dir) in enemies_pos:
+                elif (e_neighbor in enemies_pos) or (e_neighbor == self._hell_girl_._pos_):
                     return
 
                 else:
@@ -73,12 +74,13 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                e_neighbor = enemy[0].neighbor(dir)
 
                 if enemy[0].neighbor(dir) in self._walls_:
                     enemy[0]._is_alive_ = False
                     self._enemies_.remove(enemy[0])
 
-                elif enemy[0].neighbor(dir) in enemies_pos:
+                elif (e_neighbor in enemies_pos) or (e_neighbor == self._hell_girl_._pos_):
                     return
 
                 else:
@@ -105,12 +107,13 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                e_neighbor = enemy[0].neighbor(dir)
 
                 if enemy[0].neighbor(dir) in self._walls_:
                     enemy[0]._is_alive_ = False
                     self._enemies_.remove(enemy[0])
 
-                elif enemy[0].neighbor(dir) in enemies_pos:
+                elif (e_neighbor in enemies_pos) or (e_neighbor == self._hell_girl_._pos_):
                     return
 
                 else:
@@ -137,12 +140,13 @@ class Maze:
 
             elif neighbor in enemies_pos:
                 enemy = list(filter(lambda x: x._pos_ == neighbor, self._enemies_))
+                e_neighbor = enemy[0].neighbor(dir)
 
                 if enemy[0].neighbor(dir) in self._walls_:
                     enemy[0]._is_alive_ = False
                     self._enemies_.remove(enemy[0])
 
-                elif enemy[0].neighbor(dir) in enemies_pos:
+                elif (e_neighbor in enemies_pos) or (e_neighbor == self._hell_girl_._pos_):
                     return
 
                 else:
