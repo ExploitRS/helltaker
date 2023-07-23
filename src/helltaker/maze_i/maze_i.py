@@ -24,7 +24,10 @@ def construct(conf: conf.Conf) -> maze.Maze:
     HALF_YH = HALF_Y - HALF_H
     STEPS = 23
     PLAYER1 = player.Player((TMAP1._x_ / 2) + 12, (TMAP1._y_ / 2) - (TMAP1._h_ / 2), 0, 8, 0, 8, 8, 0)
-    ENEMIES = [Wizard(84, 52), Wizard(76, 44), Wizard(68, 52), Barrel(60, 68)]
+    ENEMIES = [
+        Wizard(84, 52), Wizard(76, 44), Wizard(68, 52),
+        Barrel(60, 68), Barrel(60, 76), Barrel(76, 76), Barrel(84, 68)
+    ]
     HELLGIRL = Portal(100, 76)
 
     walls = pos_vec()
