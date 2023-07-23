@@ -1,6 +1,6 @@
 # helltaker
 
-## Rquirements
+## Requirements 
 
 Since we are developing using [rye](https://github.com/mitsuhiko/rye/), we highly recommend building with [rye](https://github.com/mitsuhiko/rye/) as well. While it might work with the system's Python and pip, it could be unreliable depending on the versions of Python and the dependencies.
 
