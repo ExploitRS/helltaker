@@ -1,3 +1,4 @@
+from copy import deepcopy
 import argparse
 
 import pyxel
@@ -24,9 +25,11 @@ class App:
         pyxel.load("../../assets/resources/hell.pyxres")
         pyxel.tilemap(0)
 
-        MAZES = init_maze_list(config)
-        self._maze_list_ = MAZES
-        self._maze_vec_default = MAZES.copy()
+
+        MAZE_I = maze_i.construct(config)
+        mazes = [ MAZE_I ]
+        self._maze_list_ = mazes
+        self._maze_vec_default_ = deepcopy(mazes)
 
         self._time_limit_ = 0
         self._energy_ = 3
@@ -45,6 +48,12 @@ class App:
     def update(self):
         if len(self._maze_list_) <= 0:
             self._congraz_pane_.visible()
+            self._congraz_pane_.update()
+
+            if self._congraz_pane_._action_ == "restart":
+                self._maze_list_ = deepcopy(self._maze_vec_default_)
+                self._congraz_pane_.invisible()
+                self._congraz_pane_._action_ = ""
 
         elif self._maze_list_[0]._is_clear_:
             self._maze_list_.pop(0)
@@ -69,8 +78,5 @@ class App:
                 self._maze_list_[0].render_dbg()
                 colorise(self._maze_list_[0]._walls_, 8)
 
-        self._congraz_pane_.render()
-
-def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
-    MAZE_I = maze_i.construct(conf)
-    return [ MAZE_I ]
+        else:
+            self._congraz_pane_.render()
