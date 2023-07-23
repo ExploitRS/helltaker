@@ -7,9 +7,10 @@ import conf
 from player import Player
 from enemy import Enemy
 from avatar import Position, Direction
+from hellgirl import Portal
 
 class Maze:
-    def __init__(self, tm, steps, player: Player, enemies: list[Enemy], end_pos, walls):
+    def __init__(self, tm, steps, player: Player, enemies: list[Enemy], hell_girl, walls):
         self._tilemap_        = tm
         self._is_clear_       = False
         self._steps_          = steps
@@ -17,15 +18,16 @@ class Maze:
         self._player_         = player 
         self._enemies_        = enemies
         self._enemies_default_ = enemies.copy()
-        self._end_pos_        = end_pos
+        self._hell_girl_        = hell_girl
         self._walls_          = walls
- 
+
     def update(self):
         if 0 >= self._steps_:
             self._player_.reset_pos()
             self._steps_ = self._max_steps_
             self._enemies_ = self._enemies_default_.copy()
             _ = list(map(lambda x: x.respawn(), self._enemies_))
+
 
         if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.KEY_A):
             dir = Direction.Left
@@ -52,6 +54,9 @@ class Maze:
 
                 self._steps_ -= enemy[0]._damage_
                 return
+
+            if neighbor in self._hell_girl_.neighbor_vec():
+                self._is_clear_ = True
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
@@ -82,6 +87,9 @@ class Maze:
                 self._steps_ -= enemy[0]._damage_
                 return
 
+            if neighbor in self._hell_girl_.neighbor_vec():
+                self._is_clear_ = True
+
             self._player_.move(neighbor)
             self._steps_ -= dec_step
 
@@ -110,6 +118,9 @@ class Maze:
 
                 self._steps_ -= enemy[0]._damage_
                 return
+
+            if neighbor in self._hell_girl_.neighbor_vec():
+                self._is_clear_ = True
 
             self._player_.move(neighbor)
             self._steps_ -= dec_step
@@ -143,13 +154,14 @@ class Maze:
             self._player_.move(neighbor)
             self._steps_ -= dec_step
 
+            if neighbor in self._hell_girl_.neighbor_vec():
+                self._is_clear_ = True
+
     def draw(self):
         self._tilemap_.draw()
         self._player_.draw()
-        # for e in self._enemies_:
-        #     e.render()
-
         _ = list(map(lambda x: x.render(), self._enemies_))
+        self._hell_girl_.draw()
 
     def render_dbg(self):
         self._player_.render_position()

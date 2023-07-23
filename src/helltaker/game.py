@@ -10,6 +10,7 @@ import player
 import enemy
 from maze_i import maze_i
 from position_vec import colorise
+from congrats_pane import Congrats
 
 class App:
     def __init__(self, is_debug: bool):
@@ -25,11 +26,13 @@ class App:
 
         MAZES = init_maze_list(config)
         self._maze_list_ = MAZES
+        self._maze_vec_default = MAZES.copy()
 
         self._time_limit_ = 0
         self._energy_ = 3
         self._stage_num_ = 1
         self._is_debug_ = is_debug
+        self._congraz_pane_ = Congrats()
 
         self._time_obj_ = nav.Pallet(10, 10, self._time_limit_, 7)
         self._life_count_obj_ = nav.Pallet(10, (GAME_HEIGHT - 10), self._maze_list_[0]._steps_, 7)
@@ -40,22 +43,33 @@ class App:
         pyxel.run(self.update, self.draw)
 
     def update(self):
-        self._time_obj_._text_ = str(self._time_limit_)
-        self._life_count_obj_._text_ = str(self._maze_list_[0]._steps_)
-        self._stage_num_obj_._text_ = str(self._stage_num_)
-        self._maze_list_[0].update()
+        if len(self._maze_list_) <= 0:
+            self._congraz_pane_.visible()
+
+        elif self._maze_list_[0]._is_clear_:
+            self._maze_list_.pop(0)
+
+        else:
+            self._maze_list_[0].update()
+            self._time_obj_._text_ = str(self._time_limit_)
+            self._life_count_obj_._text_ = str(self._maze_list_[0]._steps_)
+            self._stage_num_obj_._text_ = str(self._stage_num_)
 
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
 
     def draw(self):
         pyxel.cls(0)
-        self._maze_list_[0].draw()
-        self._nav_.draw()
 
-        if self._is_debug_:
-            self._maze_list_[0].render_dbg()
-            colorise(self._maze_list_[0]._walls_, 8)
+        if len(self._maze_list_) > 0:
+            self._maze_list_[0].draw()
+            self._nav_.draw()
+
+            if self._is_debug_:
+                self._maze_list_[0].render_dbg()
+                colorise(self._maze_list_[0]._walls_, 8)
+
+        self._congraz_pane_.render()
 
 def init_maze_list(conf: conf.Conf) -> list[maze.Maze]:
     MAZE_I = maze_i.construct(conf)
