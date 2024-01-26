@@ -14,6 +14,13 @@ $ rye sync
 
 ## Run
 
+### rye:
+
 ```shell
 $ rye run python3.11 src/helltaker/main.py
+```
+### python:
+
+```shell
+$ python3 src/helltaker/main.py
 ```
